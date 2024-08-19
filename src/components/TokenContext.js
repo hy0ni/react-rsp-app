@@ -4,7 +4,7 @@ export const TokenContext = createContext();
 
 export const TokenProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [token, setToken] = useState(null);
+  const [token, setToken] = useState(localStorage.getItem('BearerToken') || '');
 
 
   useEffect(() => {
