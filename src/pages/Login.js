@@ -26,10 +26,10 @@ function Login() {
         const token = data.token;
         if (token) {
           login(token);
-          window.alert('로그인에 성공하였습니다.');
+          alert('로그인에 성공하였습니다.');
           navigate('/');
         } else {
-          window.alert('로그인에 실패하였습니다.')
+          alert('로그인에 실패하였습니다.');
         }
       })
       .catch(error => console.log('error', error));
