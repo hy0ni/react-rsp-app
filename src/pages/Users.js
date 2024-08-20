@@ -6,7 +6,7 @@ import { TokenContext } from "../components/TokenContext";
 function Users() {
   const { userId } = useParams(); // URL 파라미터에서 사용자 ID 가져오기
   const [user, setUser] = useState('');
-  const [history, setHistory] = useState([]);
+  const [GameHistory, setGameHistory] = useState([]);
   const { isAuthenticated, token } = useContext(TokenContext);
 
   useEffect(() => {
@@ -39,7 +39,7 @@ function Users() {
 
     fetch(`https://rps-games-dyowf.run.goorm.site/users/${userId}/games`, requestOptions)
       .then(response => response.json())
-      .then(result => setHistory(result))
+      .then(result => setGameHistory(result))
       .catch(error => console.log('error', error));
   }
 
@@ -69,7 +69,7 @@ function Users() {
       .then(result => {
         console.log(result);
         alert('게임을 삭제하였습니다.');
-        setHistory(history.filter(game => game.id !== gameId));
+        setGameHistory(GameHistory.filter(game => game.id !== gameId));
 
       })
       .catch(error => {
@@ -84,7 +84,7 @@ function Users() {
       <h2>유저 정보</h2>
       <p>이메일: {user.email}</p>
       <h3>게임 정보</h3>
-      {history.map((game) => (
+      {GameHistory.map((game) => (
         <table key={game.id}>
           <thead>
             <tr>
