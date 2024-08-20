@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { TokenContext } from "../components/TokenContext";
+import GameTable from "../components/GameTable";
 
 function MyPage() {
   const { token } = useContext(TokenContext);
@@ -112,18 +113,18 @@ function MyPage() {
       });
   }
 
-  const getBackgroundColor = (gameResult) => {
-    switch (gameResult) {
-      case '패배':
-        return '#ff9b9466';
-      case '승리':
-        return '#4cae4f66';
-      case '무승부':
-        return '#ffe50066';
-      default:
-        return 'white';
-    }
-  };
+  // const getBackgroundColor = (gameResult) => {
+  //   switch (gameResult) {
+  //     case '패배':
+  //       return '#ff9b9466';
+  //     case '승리':
+  //       return '#4cae4f66';
+  //     case '무승부':
+  //       return '#ffe50066';
+  //     default:
+  //       return 'white';
+  //   }
+  // };
 
   return (
     <div>
@@ -141,58 +142,7 @@ function MyPage() {
         <button>결과 확인하기</button>
       </form>
       <h3>게임 정보</h3>
-
-      <table>
-        <thead>
-          <tr>
-            <th>결과</th>
-            <th>플레이</th>
-            <th>일정</th>
-            <th>ACTION</th>
-          </tr>
-        </thead>
-        <tbody>
-          {GameHistory.map(game => <tr key={game.id} style={{ backgroundColor: getBackgroundColor(game.result) }}>
-            <td>{game.result}</td>
-            <td>
-              <div>
-                <span>사용자</span>
-                <span>{game.user_choice}</span>
-              </div>
-              <span>VS</span>
-              <div>
-                <span>컴퓨터</span>
-                <span>{game.computer_choice}</span>
-              </div>
-            </td>
-            <td>{new Date(game.created_at).toLocaleString()}</td>
-            <td>
-              <button onClick={() => handleGamesDelete(game.id)}>삭제</button>
-            </td>
-          </tr>)}
-
-          {allGameHistory.map(game => <tr key={game.id} style={{ backgroundColor: getBackgroundColor(game.result) }}>
-            <td>{game.result}</td>
-            <td>
-              <div>
-                <span>사용자</span>
-                <span>{game.user_choice}</span>
-              </div>
-              <span>VS</span>
-              <div>
-                <span>컴퓨터</span>
-                <span>{game.computer_choice}</span>
-              </div>
-            </td>
-            <td>{new Date(game.created_at).toLocaleString()}</td>
-            <td>
-              <button onClick={() => handleGamesDelete(game.id)}>삭제</button>
-            </td>
-          </tr>)}
-        </tbody>
-
-      </table>
-
+      <GameTable games={[...GameHistory, ...allGameHistory]} onDelete={handleGamesDelete} />
     </div>
   )
 }

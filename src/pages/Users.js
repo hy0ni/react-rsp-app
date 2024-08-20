@@ -2,6 +2,7 @@
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { TokenContext } from "../components/TokenContext";
+import GameTable from "../components/GameTable";
 
 function Users() {
   const { userId } = useParams(); // URL 파라미터에서 사용자 ID 가져오기
@@ -84,38 +85,7 @@ function Users() {
       <h2>유저 정보</h2>
       <p>이메일: {user.email}</p>
       <h3>게임 정보</h3>
-      {GameHistory.map((game) => (
-        <table key={game.id}>
-          <thead>
-            <tr>
-              <th>결과</th>
-              <th>플레이</th>
-              <th>일정</th>
-              <th>ACTION</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>{game.result}</td>
-              <td>
-                <div>
-                  <span>사용자</span>
-                  <span>{game.user_choice}</span>
-                </div>
-                <span>VS</span>
-                <div>
-                  <span>컴퓨터</span>
-                  <span>{game.computer_choice}</span>
-                </div>
-              </td>
-              <td>{new Date(game.created_at).toLocaleString()}</td>
-              <td>
-                <button onClick={() => handleGamesDelete(game.id)}>삭제</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      ))}
+      <GameTable games={GameHistory} onDelete={handleGamesDelete} />
     </div>
   )
 }
