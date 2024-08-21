@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/react-rsp-app/static/css/main.fb0bc301.css",
+    "main.js": "/react-rsp-app/static/js/main.5d0d1259.js",
+    "index.html": "/react-rsp-app/index.html",
+    "static/media/person.svg": "/react-rsp-app/static/media/person.17fba55395d8f00e652e.svg",
+    "static/media/download.svg": "/react-rsp-app/static/media/download.246265e3f1d8b4897256.svg",
+    "main.fb0bc301.css.map": "/react-rsp-app/static/css/main.fb0bc301.css.map",
+    "main.5d0d1259.js.map": "/react-rsp-app/static/js/main.5d0d1259.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.fb0bc301.css",
+    "static/js/main.5d0d1259.js"
+  ]
+}
