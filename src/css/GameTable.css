@@ -1,0 +1,87 @@
+/* @import './button.css'; */
+
+/*------------------------------------------------------
+  # GameTable (MyPage, Users)
+ ------------------------------------------------------ */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+th {
+  background: #ffffff63;
+}
+
+tr {
+  border-bottom: 1px solid #d1d1d163;
+}
+
+td {
+  padding: 0.8rem;
+}
+
+span {
+  display: block;
+}
+
+.game-choice {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .3rem;
+}
+
+.text-gray {
+  color: #666;
+  font-size: 0.8rem;
+  line-height: 1rem;
+}
+
+.text-bold {
+  font-size: .9rem;
+  font-weight: 600;
+}
+
+.btn-delete {
+  font-size: 1rem;
+  color: #dd1e10;
+}
+
+/*------------------------------------------------------
+  # select (MyPage)
+ ------------------------------------------------------ */
+.my-page form {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  gap: 1;
+}
+
+.my-page select {
+  max-width: 60%;
+  margin-right: 0.5rem;
+  padding: 0.8rem 3rem 0.8rem 1rem;
+  border-radius: 0.6rem;
+  border: 1px solid #ccc;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: url('../image/download.svg') no-repeat right 1rem center;
+  background-size: 1rem;
+  background-color: #fff;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+  cursor: pointer;
+}
+
+.my-page select:focus {
+  border: 2px solid #0056b3;
+  outline: none;
+}
+
+.my-page select option {
+  padding: 1rem;
+
+}

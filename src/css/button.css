@@ -1,0 +1,36 @@
+.btn {
+  padding: 0.8rem 1rem;
+  color: #fff;
+  background: #171e33;
+  border-radius: 0.6rem;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.4s ease-in-out;
+}
+
+button.btn:hover {
+  color: #fff;
+  background-color: rgb(4, 10, 32);
+}
+
+button.btn:active {
+  color: #fff;
+  background-color: rgb(1, 30, 61);
+}
+
+button.btn:disabled {
+  background-color: #aaa;
+  cursor: not-allowed;
+}
+
+
+.bg-white {
+  color: #222;
+  background-color: #fff;
+}
+
+hr {
+  border: 0;
+  height: 1px;
+  background-color: #dbdbdb;
+}

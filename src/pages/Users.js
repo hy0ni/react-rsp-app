@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { TokenContext } from "../components/TokenContext";
 import GameTable from "../components/GameTable";
+import '../css/GameTable.css'
 
 function Users() {
   const { userId } = useParams(); // URL 파라미터에서 사용자 ID 가져오기

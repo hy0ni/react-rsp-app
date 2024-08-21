@@ -10,17 +10,28 @@ const GameTable = ({ games, onDelete }) => {
     const minutes = String(date.getMinutes()).padStart(2, '0');
     const seconds = String(date.getSeconds()).padStart(2, '0');
 
-    return `${year}/${month}/${day} ${hours}:${minutes}:${seconds}`;
+    const formattedDate = `${year}/${month}/${day}`;
+    const formattedTime = `${hours}:${minutes}:${seconds}`
+    return (
+      <>
+        <div className="text-gray">
+          {formattedDate}
+        </div>
+        <div className="text-gray">
+          {formattedTime}
+        </div>
+      </>
+    );
   }
 
   const getBackgroundColor = (gameResult) => {
     switch (gameResult) {
       case '패배':
-        return '#ff9b9466';
+        return '#ffe8e6';
       case '승리':
-        return '#4cae4f66';
+        return '#e2ffe3';
       case '무승부':
-        return '#ffe50066';
+        return '#fffad2';
       default:
         return '#fff';
     }
@@ -42,20 +53,20 @@ const GameTable = ({ games, onDelete }) => {
             games.map((game) => (
               <tr key={game.id} style={{ backgroundColor: getBackgroundColor(game.result) }}>
                 <td>{game.result}</td>
-                <td>
+                <td className="game-choice">
                   <div>
-                    <span>사용자</span>
+                    <span className="text-gray">사용자</span>
                     <span>{game.user_choice}</span>
                   </div>
-                  <span>VS</span>
+                  <span className="text-gray text-bold">VS</span>
                   <div>
-                    <span>컴퓨터</span>
+                    <span className="text-gray">컴퓨터</span>
                     <span>{game.computer_choice}</span>
                   </div>
                 </td>
                 <td>{formatDateTime(game.created_at)}</td>
                 <td>
-                  <button onClick={() => onDelete(game.id)}>삭제</button>
+                  <button className="btn-delete" onClick={() => onDelete(game.id)}>삭제</button>
                 </td>
               </tr>
             ))

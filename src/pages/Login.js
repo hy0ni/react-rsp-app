@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { TokenContext } from "../components/TokenContext";
 import { useNavigate } from "react-router-dom";
+import '../css/Form.css';
 
 function Login() {
   const { login } = useContext(TokenContext);
@@ -38,7 +39,7 @@ function Login() {
   return (
     <div>
       <h1>로그인 페이지</h1>
-      <form onSubmit={handleLogin}>
+      <form className="form" onSubmit={handleLogin}>
         <div>
           <label htmlFor="email">이메일</label>
           <input
@@ -58,8 +59,9 @@ function Login() {
             value={password} onChange={(e) => setPassword(e.target.value)}
             required />
         </div>
-        <button type="submit">로그인하기</button>
-        <button onClick={() => navigate('/signup')} >가입하러 가기</button>
+        <button className="btn" type="submit">로그인하기</button>
+        <hr />
+        <button className="btn bg-white" onClick={() => navigate('/signup')} type="submit">가입하러 가기</button>
       </form>
     </div>
   )

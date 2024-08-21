@@ -1,0 +1,28 @@
+@import './button.css';
+
+.total-list {
+  display: flex;
+  align-items: center;
+  padding: 0.4rem;
+  background: #ffffff8f;
+}
+
+.total-list:not(:last-of-type) {
+  margin-bottom: 0.6rem;
+}
+
+.total-list::before {
+  content: "";
+  display: block;
+  padding: 1.5rem;
+  background: url('../image/person.svg') no-repeat center center;
+  background-size: 60%;
+}
+
+.total-list p {
+  margin-right: auto;
+}
+
+.total-list span {
+  padding: 0 1rem;
+}

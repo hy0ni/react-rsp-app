@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { TokenContext } from "../components/TokenContext";
 import GameTable from "../components/GameTable";
+import '../css/GameTable.css'
 
 function MyPage() {
   const { token } = useContext(TokenContext);
@@ -113,21 +114,8 @@ function MyPage() {
       });
   }
 
-  // const getBackgroundColor = (gameResult) => {
-  //   switch (gameResult) {
-  //     case '패배':
-  //       return '#ff9b9466';
-  //     case '승리':
-  //       return '#4cae4f66';
-  //     case '무승부':
-  //       return '#ffe50066';
-  //     default:
-  //       return 'white';
-  //   }
-  // };
-
   return (
-    <div>
+    <div className="my-page">
       <h1>마이페이지</h1>
       <h2>유저 정보</h2>
       <p>이메일: {currentUser.email}</p>
@@ -139,7 +127,7 @@ function MyPage() {
           <option value="바위">바위</option>
           <option value="보">보</option>
         </select>
-        <button>결과 확인하기</button>
+        <button className="btn" type="submit">결과 확인하기</button>
       </form>
       <h3>게임 정보</h3>
       <GameTable games={[...GameHistory, ...allGameHistory]} onDelete={handleGamesDelete} />

@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { TokenContext } from "./TokenContext";
+import '../css/Header.css'
 
 function Header() {
   const { isAuthenticated, logout } = useContext(TokenContext);

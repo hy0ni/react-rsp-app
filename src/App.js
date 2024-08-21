@@ -10,21 +10,24 @@ import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import Users from "./pages/Users";
 import MyPage from "./pages/MyPage";
+import './css/App.css';
 
 function App() {
   return (
-    <TokenProvider>
-      <Router>
-        <Header />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/user/:userId/games" element={<Users />} />
-          <Route path="/mypage" element={<MyPage />} />
-        </Routes>
-      </Router>
-    </TokenProvider>
+    <div className="container">
+      <TokenProvider>
+        <Router>
+          <Header />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/user/:userId/games" element={<Users />} />
+            <Route path="/mypage" element={<MyPage />} />
+          </Routes>
+        </Router>
+      </TokenProvider>
+    </div>
   )
 }
 
