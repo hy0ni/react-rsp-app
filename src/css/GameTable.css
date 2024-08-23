@@ -60,7 +60,7 @@ span {
 }
 
 .my-page select {
-  max-width: 60%;
+  max-width: 58%;
   margin-right: 0.5rem;
   padding: 0.8rem 3rem 0.8rem 1rem;
   border-radius: 0.6rem;
@@ -68,7 +68,8 @@ span {
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
-  background: url('../image/download.svg') no-repeat right 1rem center;
+  background: url('../image/download.svg') no-repeat;
+  background-position: right 1rem center;
   background-size: 1rem;
   background-color: #fff;
   font-size: 1rem;
@@ -83,5 +84,17 @@ span {
 
 .my-page select option {
   padding: 1rem;
+}
 
+@media (max-width:416px) {
+  td {
+    padding: 0.6rem;
+  }
+
+  .my-page select {
+    padding-right: 2rem;
+    font-size: 0.8rem;
+    background-size: 0.8rem;
+    background-position: right 0.8rem center;
+  }
 }

@@ -1,4 +1,5 @@
 .btn {
+  min-width:4rem;
   padding: 0.8rem 1rem;
   color: #fff;
   background: #171e33;

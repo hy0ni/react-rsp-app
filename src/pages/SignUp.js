@@ -1,13 +1,14 @@
 import { useContext, useState } from "react";
 import { TokenContext } from "../context/TokenContext";
-import { useNavigate } from "react-router-dom";
+import usePopup from "../hooks/usePopup";
+import Popup from "../components/Popup";
 import '../css/Form.css';
 
 function SignUp() {
   const { login } = useContext(TokenContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate();
+  const { showPopup, popupMessage, openPopup, closePopup } = usePopup();
 
   const handleSignUp = (e) => {
     e.preventDefault();
@@ -28,10 +29,9 @@ function SignUp() {
         const token = data.token;
         if (token) {
           login(token);
-          window.alert('회원가입에 성공하였습니다.');
-          navigate('/');
+          openPopup('회원가입에 성공하였습니다.', '/');
         } else {
-          window.alert('회원가입에 실패하였습니다.')
+          openPopup('회원가입에 실패하였습니다.')
         }
       })
       .catch(error => console.log('error', error));
@@ -62,6 +62,7 @@ function SignUp() {
         </div>
         <button className="btn" type="submit">가입하기</button>
       </form>
+      <Popup showPopup={showPopup} message={popupMessage} onClose={closePopup} />
     </div>
   )
 }

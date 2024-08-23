@@ -21,8 +21,12 @@
 
 .total-list p {
   margin-right: auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .total-list span {
+  min-width: 1.6rem;
   padding: 0 1rem;
 }

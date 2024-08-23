@@ -3,6 +3,8 @@ import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { TokenContext } from "../context/TokenContext";
 import GameTable from "../components/GameTable";
+import usePopup from "../hooks/usePopup";
+import Popup from "../components/Popup";
 import '../css/GameTable.css'
 
 function Users() {
@@ -10,6 +12,7 @@ function Users() {
   const [user, setUser] = useState('');
   const [GameHistory, setGameHistory] = useState([]);
   const { isAuthenticated, token } = useContext(TokenContext);
+  const { showPopup, popupMessage, openPopup, closePopup } = usePopup();
 
   useEffect(() => {
     userInfo(userId, token)
@@ -48,7 +51,7 @@ function Users() {
   //전적 삭제하기
   const handleGamesDelete = (gameId) => {
     if (!isAuthenticated) {
-      alert('로그인된 사용자만 삭제 가능')
+      openPopup('로그인 후 삭제가 가능합니다.')
       return;
     }
 
@@ -69,14 +72,13 @@ function Users() {
         }
       })
       .then(result => {
-        console.log(result);
-        alert('게임을 삭제하였습니다.');
+        openPopup('게임을 삭제하였습니다.');
         setGameHistory(GameHistory.filter(game => game.id !== gameId));
 
       })
       .catch(error => {
         console.log('오류:', error);
-        alert(error.message);
+        openPopup(error.message);
       });
   }
 
@@ -87,6 +89,7 @@ function Users() {
       <p>이메일: {user.email}</p>
       <h3>게임 정보</h3>
       <GameTable games={GameHistory} onDelete={handleGamesDelete} />
+      <Popup showPopup={showPopup} message={popupMessage} onClose={closePopup} />
     </div>
   )
 }

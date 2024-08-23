@@ -1,6 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import { TokenContext } from "../context/TokenContext";
 import GameTable from "../components/GameTable";
+import usePopup from "../hooks/usePopup";
+import Popup from "../components/Popup";
 import '../css/GameTable.css'
 
 function MyPage() {
@@ -9,6 +11,7 @@ function MyPage() {
   const [selectedValue, setSelectedValue] = useState('');
   const [allGameHistory, setAllGameHistory] = useState([]);
   const [GameHistory, setGameHistory] = useState([]);
+  const { showPopup, popupMessage, openPopup, closePopup } = usePopup();
 
   useEffect(() => {
     if (token) {
@@ -78,8 +81,9 @@ function MyPage() {
           },
           ...history
         ])
-        console.log(data)
-        alert(`당신의 선택은 ${data.user_choice}이고 컴퓨터의 선택은 ${data.computer_choice}입니다.결과는 ${data.result}입니다.`)
+        openPopup(`당신의 선택은 ${data.user_choice}이고,
+           컴퓨터의 선택은 ${data.computer_choice}입니다.
+           결과는 ${data.result}입니다.`);
       })
       .catch(error => console.log('error', error));
   }
@@ -94,23 +98,15 @@ function MyPage() {
     };
 
     fetch(`https://rps-games-dyowf.run.goorm.site/games/${gameId}`, requestOptions)
-      .then(response => {
-        if (response.ok) {
-          return response.text();
-        } else if (response.status !== 404) {
-          throw new Error('본인의 게임만 삭제 가능합니다.');
-        }
-      })
+      .then(response => response.text())
       .then(result => {
-        console.log(result);
-        alert('게임을 삭제하였습니다.');
+        openPopup('게임을 삭제하였습니다.');
         setAllGameHistory(history => history.filter(game => game.id !== gameId));
         setGameHistory(history => history.filter(game => game.id !== gameId));
 
       })
       .catch(error => {
         console.log('오류:', error);
-        alert(error.message);
       });
   }
 
@@ -131,6 +127,7 @@ function MyPage() {
       </form>
       <h3>게임 정보</h3>
       <GameTable games={[...GameHistory, ...allGameHistory]} onDelete={handleGamesDelete} />
+      <Popup showPopup={showPopup} message={popupMessage} onClose={closePopup} />
     </div>
   )
 }
