@@ -20,11 +20,12 @@ function Header() {
           <>
             <button onClick={() => {
               navigate('/mypage');
-            }}>마이페이지</button>
-            <button onClick={handleLogoutClick}>로그아웃</button>
+            }} aria-label="마이페이지로 이동">마이페이지</button>
+            <button onClick={handleLogoutClick}
+              aria-label="로그아웃">로그아웃</button>
           </>
         ) : (
-          <button onClick={() => navigate('/login')}>로그인</button>
+          <button onClick={() => navigate('/login')} aria-label="로그인 페이지로 이동">로그인</button>
         )
       }
     </header>

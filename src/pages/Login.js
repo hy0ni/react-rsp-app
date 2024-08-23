@@ -61,7 +61,7 @@ function Login() {
         </div>
         <button className="btn" type="submit">로그인하기</button>
         <hr />
-        <button className="btn bg-white" onClick={() => navigate('/signup')} type="submit">가입하러 가기</button>
+        <button className="btn bg-white" onClick={() => navigate('/signup')} type="submit" aria-label="회원가입페이지로 이동">가입하러 가기</button>
       </form>
     </div>
   )
