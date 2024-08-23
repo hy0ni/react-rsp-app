@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { TokenContext } from "../components/TokenContext";
+import { TokenContext } from "../context/TokenContext";
 import GameTable from "../components/GameTable";
 import '../css/GameTable.css'
 

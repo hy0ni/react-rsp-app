@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useContext } from "react";
-import { TokenContext } from "./TokenContext";
+import { TokenContext } from "../context/TokenContext";
 import '../css/Header.css'
 
 function Header() {

@@ -1,7 +1,7 @@
 // import { useContext } from "react";
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { TokenContext } from "../components/TokenContext";
+import { TokenContext } from "../context/TokenContext";
 import GameTable from "../components/GameTable";
 import '../css/GameTable.css'
 
