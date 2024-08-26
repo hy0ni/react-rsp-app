@@ -9,7 +9,7 @@ function Home() {
   const navigate = useNavigate();
 
   const allUsersGameList = (token) => {
-    var requestOptions = {
+    let requestOptions = {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${token}`,

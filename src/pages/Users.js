@@ -21,7 +21,7 @@ function Users() {
 
   // 특정 사용자 정보 가져오기
   const userInfo = (userId, token) => {
-    var requestOptions = {
+    let requestOptions = {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${token}`
@@ -37,7 +37,7 @@ function Users() {
 
   // 특정 사용자의 전적 가져오기
   const userGameHistoryList = (userId) => {
-    var requestOptions = {
+    let requestOptions = {
       method: 'GET',
       redirect: 'follow'
     };
@@ -55,7 +55,7 @@ function Users() {
       return;
     }
 
-    var requestOptions = {
+    let requestOptions = {
       method: 'DELETE',
       headers: {
         'Authorization': `Bearer ${token}`

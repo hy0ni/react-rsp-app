@@ -13,11 +13,11 @@ function SignUp() {
   const handleSignUp = (e) => {
     e.preventDefault();
 
-    var formdata = new FormData();
+    let formdata = new FormData();
     formdata.append("email", email);
     formdata.append("password", password);
 
-    var requestOptions = {
+    let requestOptions = {
       method: 'POST',
       body: formdata,
       redirect: 'follow'

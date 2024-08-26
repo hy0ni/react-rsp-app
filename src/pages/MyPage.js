@@ -22,7 +22,7 @@ function MyPage() {
 
   // 나의 정보 불러오기
   const currentUserInfo = (token) => {
-    var requestOptions = {
+    let requestOptions = {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${token}`
@@ -38,7 +38,7 @@ function MyPage() {
 
   // 나의 전체 전적 가져오기
   const currentGameHistory = (token) => {
-    var requestOptions = {
+    let requestOptions = {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${token}`
@@ -56,10 +56,10 @@ function MyPage() {
   const handleGames = (e) => {
     e.preventDefault();
 
-    var formdata = new FormData();
+    let formdata = new FormData();
     formdata.append("user_choice", selectedValue);
 
-    var requestOptions = {
+    let requestOptions = {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -89,7 +89,7 @@ function MyPage() {
   }
 
   const handleGamesDelete = (gameId) => {
-    var requestOptions = {
+    let requestOptions = {
       method: 'DELETE',
       headers: {
         'Authorization': `Bearer ${token}`
