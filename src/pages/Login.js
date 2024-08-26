@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { TokenContext } from "../context/TokenContext";
 import { useNavigate } from "react-router-dom";
 import Popup from "../components/Popup";
@@ -6,11 +6,17 @@ import usePopup from "../hooks/usePopup";
 import '../css/Form.css';
 
 function Login() {
-  const { login } = useContext(TokenContext);
+  const { isAuthenticated, login } = useContext(TokenContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { showPopup, popupMessage, openPopup, closePopup } = usePopup();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/');
+    }
+  }, [isAuthenticated, navigate]);
 
   const handleLogin = (e) => {
     e.preventDefault();

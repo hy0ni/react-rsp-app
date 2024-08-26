@@ -4,21 +4,26 @@ import GameTable from "../components/GameTable";
 import usePopup from "../hooks/usePopup";
 import Popup from "../components/Popup";
 import '../css/GameTable.css'
+import { useNavigate } from "react-router-dom";
 
 function MyPage() {
-  const { token } = useContext(TokenContext);
+  const { isAuthenticated, token } = useContext(TokenContext);
   const [currentUser, setCurrentUser] = useState('');
   const [selectedValue, setSelectedValue] = useState('');
   const [allGameHistory, setAllGameHistory] = useState([]);
   const [GameHistory, setGameHistory] = useState([]);
   const { showPopup, popupMessage, openPopup, closePopup } = usePopup();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (token) {
       currentUserInfo(token);
       currentGameHistory(token);
     }
-  }, [token]);
+    if (!isAuthenticated) {
+      navigate('/login');
+    }
+  }, [token, isAuthenticated, navigate]);
 
   // 나의 정보 불러오기
   const currentUserInfo = (token) => {
