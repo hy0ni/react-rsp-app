@@ -11,18 +11,16 @@ function MyPage() {
   const [currentUser, setCurrentUser] = useState('');
   const [selectedValue, setSelectedValue] = useState('');
   const [allGameHistory, setAllGameHistory] = useState([]);
-  const [GameHistory, setGameHistory] = useState([]);
+  const [gameHistory, setGameHistory] = useState([]);
   const { showPopup, popupMessage, openPopup, closePopup } = usePopup();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (token) {
-      currentUserInfo(token);
-      currentGameHistory(token);
-    }
-    if (!isAuthenticated) {
+    if (!token) {
       navigate('/login');
     }
+    currentUserInfo(token);
+    currentGameHistory(token);
   }, [token, isAuthenticated, navigate]);
 
   // 나의 정보 불러오기
@@ -131,7 +129,7 @@ function MyPage() {
         <button className="btn" type="submit">결과 확인하기</button>
       </form>
       <h3>게임 정보</h3>
-      <GameTable games={[...GameHistory, ...allGameHistory]} onDelete={handleGamesDelete} />
+      <GameTable games={[...gameHistory, ...allGameHistory]} onDelete={handleGamesDelete} />
       <Popup showPopup={showPopup} message={popupMessage} onClose={closePopup} />
     </div>
   )
