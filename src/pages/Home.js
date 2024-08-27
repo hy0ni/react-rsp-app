@@ -9,6 +9,8 @@ function Home() {
   const navigate = useNavigate();
 
   const allUsersGameList = (token) => {
+    const apiUrl = process.env.REACT_APP_API_URL;
+
     let requestOptions = {
       method: 'GET',
       headers: {
@@ -17,10 +19,13 @@ function Home() {
       redirect: 'follow'
     };
 
-    fetch("https://rps-games-dyowf.run.goorm.site/users", requestOptions)
+    fetch(`${apiUrl}/users`, requestOptions)
       .then(response => response.json())
       .then(result => setUsers(result))
-      .catch(error => console.log('error', error));
+      .catch(error => {
+        console.log('error', error);
+        alert('데이터를 가져오는 중 오류가 발생했습니다. 나중에 다시 시도해 주세요.');
+      });
   }
 
   useEffect(() => {
