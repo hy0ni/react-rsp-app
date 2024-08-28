@@ -21,6 +21,7 @@ function Users() {
 
   // 특정 사용자 정보 가져오기
   const userInfo = (userId, token) => {
+
     let requestOptions = {
       method: 'GET',
       headers: {
@@ -29,10 +30,13 @@ function Users() {
       redirect: 'follow'
     };
 
-    fetch(`https://rps-games-dyowf.run.goorm.site/users/${userId}`, requestOptions)
+    fetch(`${process.env.REACT_APP_API_URL}/users/${userId}`, requestOptions)
       .then(response => response.json())
       .then(result => setUser(result))
-      .catch(error => console.log('error', error));
+      .catch(error => {
+        console.log('error', error);
+        alert('정보를 가져오는 중 오류가 발생했습니다.');
+      });
   }
 
   // 특정 사용자의 전적 가져오기
@@ -42,16 +46,19 @@ function Users() {
       redirect: 'follow'
     };
 
-    fetch(`https://rps-games-dyowf.run.goorm.site/users/${userId}/games`, requestOptions)
+    fetch(`${process.env.REACT_APP_API_URL}/users/${userId}/games`, requestOptions)
       .then(response => response.json())
       .then(result => setGameHistory(result))
-      .catch(error => console.log('error', error));
+      .catch(error => {
+        console.log('error', error);
+        alert('사용자의 전적을 가져오는 중 오류가 발생했습니다.');
+      });
   }
 
   //전적 삭제하기
   const handleGamesDelete = (gameId) => {
     if (!isAuthenticated) {
-      openPopup('로그인 후 삭제가 가능합니다.')
+      openPopup('로그인 후 삭제가 가능합니다.');
       return;
     }
 
@@ -63,7 +70,7 @@ function Users() {
       redirect: 'follow'
     };
 
-    fetch(`https://rps-games-dyowf.run.goorm.site/games/${gameId}`, requestOptions)
+    fetch(`${process.env.REACT_APP_API_URL}/games/${gameId}`, requestOptions)
       .then(response => {
         if (response.ok) {
           return response.text();

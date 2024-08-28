@@ -4,24 +4,20 @@ import GameTable from "../components/GameTable";
 import usePopup from "../hooks/usePopup";
 import Popup from "../components/Popup";
 import '../css/GameTable.css'
-import { useNavigate } from "react-router-dom";
 
 function MyPage() {
-  const { isAuthenticated, token } = useContext(TokenContext);
+  const { token } = useContext(TokenContext);
   const [currentUser, setCurrentUser] = useState('');
   const [selectedValue, setSelectedValue] = useState('');
   const [allGameHistory, setAllGameHistory] = useState([]);
   const [gameHistory, setGameHistory] = useState([]);
   const { showPopup, popupMessage, openPopup, closePopup } = usePopup();
-  const navigate = useNavigate();
 
   useEffect(() => {
-    if (!token) {
-      navigate('/login');
-    }
     currentUserInfo(token);
     currentGameHistory(token);
-  }, [token, isAuthenticated, navigate]);
+  }, [token]);
+
 
   // 나의 정보 불러오기
   const currentUserInfo = (token) => {
@@ -33,10 +29,13 @@ function MyPage() {
       redirect: 'follow'
     };
 
-    fetch("https://rps-games-dyowf.run.goorm.site/current_users", requestOptions)
+    fetch(`${process.env.REACT_APP_API_URL}/current_users`, requestOptions)
       .then(response => response.json())
       .then(result => setCurrentUser(result))
-      .catch(error => console.log('error', error));
+      .catch(error => {
+        console.log('error', error);
+        alert('정보를 불러오는 중 오류가 발생했습니다.');
+      });
   }
 
   // 나의 전체 전적 가져오기
@@ -49,10 +48,13 @@ function MyPage() {
       redirect: 'follow'
     };
 
-    fetch("https://rps-games-dyowf.run.goorm.site/current_users/games", requestOptions)
+    fetch(`${process.env.REACT_APP_API_URL}/current_users/games`, requestOptions)
       .then(response => response.json())
       .then(result => setAllGameHistory(result))
-      .catch(error => console.log('error', error));
+      .catch(error => {
+        console.log('error', error);
+        alert('전체 전적 리스트를 가져오는 중 오류가 발생했습니다.');
+      });
   }
 
   // 가위바위보 게임하기
@@ -71,7 +73,7 @@ function MyPage() {
       redirect: 'follow'
     };
 
-    fetch("https://rps-games-dyowf.run.goorm.site/games", requestOptions)
+    fetch(`${process.env.REACT_APP_API_URL}/games`, requestOptions)
       .then(response => response.json())
       .then(data => {
         setGameHistory(history => [
@@ -88,7 +90,10 @@ function MyPage() {
            컴퓨터의 선택은 ${data.computer_choice}입니다.
            결과는 ${data.result}입니다.`);
       })
-      .catch(error => console.log('error', error));
+      .catch(error => {
+        console.log('error', error);
+        alert('오류가 발생했습니다.');
+      });
   }
 
   const handleGamesDelete = (gameId) => {
@@ -100,7 +105,7 @@ function MyPage() {
       redirect: 'follow'
     };
 
-    fetch(`https://rps-games-dyowf.run.goorm.site/games/${gameId}`, requestOptions)
+    fetch(`${process.env.REACT_APP_API_URL}/games/${gameId}`, requestOptions)
       .then(response => response.text())
       .then(result => {
         openPopup('게임을 삭제하였습니다.');
@@ -109,7 +114,8 @@ function MyPage() {
 
       })
       .catch(error => {
-        console.log('오류:', error);
+        console.log('error', error);
+        alert('게임 삭제 중 오류가 발생했습니다.');
       });
   }
 

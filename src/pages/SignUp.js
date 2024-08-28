@@ -1,25 +1,19 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { TokenContext } from "../context/TokenContext";
 import usePopup from "../hooks/usePopup";
 import Popup from "../components/Popup";
 import '../css/Form.css';
-import { useNavigate } from "react-router-dom";
+
 
 function SignUp() {
-  const { isAuthenticated, login } = useContext(TokenContext);
+  const { login } = useContext(TokenContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { showPopup, popupMessage, openPopup, closePopup } = usePopup();
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (isAuthenticated) {
-      navigate('/')
-    }
-  }, [isAuthenticated, navigate]);
 
   const handleSignUp = (e) => {
     e.preventDefault();
+    const apiUrl = process.env.REACT_APP_API_URL;
 
     let formdata = new FormData();
     formdata.append("email", email);
@@ -31,7 +25,7 @@ function SignUp() {
       redirect: 'follow'
     };
 
-    fetch("https://rps-games-dyowf.run.goorm.site/signup", requestOptions)
+    fetch(`${apiUrl}/signup`, requestOptions)
       .then(response => response.json())
       .then(data => {
         const token = data.token;
@@ -39,10 +33,13 @@ function SignUp() {
           login(token);
           openPopup('회원가입에 성공하였습니다.', '/');
         } else {
-          openPopup('회원가입에 실패하였습니다.')
+          openPopup('회원가입에 실패하였습니다.');
         }
       })
-      .catch(error => console.log('error', error));
+      .catch(error => {
+        console.log('error', error);
+        alert('회원가입 중 오류가 발생했습니다.');
+      });
 
   }
   return (

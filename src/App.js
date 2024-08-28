@@ -2,15 +2,33 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
+  Navigate,
 } from "react-router-dom";
-import { TokenProvider } from './context/TokenContext';
+import { TokenContext, TokenProvider } from './context/TokenContext';
 import Header from "./components/Header";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
-import SignUp from "./pages/SignUp";
+import Signup from "./pages/Signup";
 import Users from "./pages/Users";
-import MyPage from "./pages/MyPage";
+import Mypage from "./pages/Mypage";
 import './css/App.css';
+import { useContext } from "react";
+
+function UnAuthRoute({ children }) {
+  const { token } = useContext(TokenContext);
+  if (!token) {
+    return <Navigate to='/login' />;
+  }
+  return children;
+}
+
+function AuthRoute({ children }) {
+  const { token } = useContext(TokenContext);
+  if (token) {
+    return <Navigate to="/" />;
+  }
+  return children;
+}
 
 function App() {
   return (
@@ -20,10 +38,10 @@ function App() {
           <Header />
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="/user/:userId/games" element={<Users />} />
-            <Route path="/mypage" element={<MyPage />} />
+            <Route path="/login" element={<AuthRoute><Login /></AuthRoute>} />
+            <Route path="/signup" element={<AuthRoute><Signup /></AuthRoute>} />
+            <Route path="/user/:userId/games" element={<UnAuthRoute><Users /></UnAuthRoute>} />
+            <Route path="/mypage" element={<UnAuthRoute><Mypage /></UnAuthRoute>} />
           </Routes>
         </Router>
       </TokenProvider>
