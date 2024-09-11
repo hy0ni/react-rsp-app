@@ -40,7 +40,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<AuthRoute><Login /></AuthRoute>} />
             <Route path="/signup" element={<AuthRoute><Signup /></AuthRoute>} />
-            <Route path="/user/:userId/games" element={<UnAuthRoute><Users /></UnAuthRoute>} />
+            <Route path="/user/:userId/games" element={<Users />} />
             <Route path="/mypage" element={<UnAuthRoute><Mypage /></UnAuthRoute>} />
           </Routes>
         </Router>
