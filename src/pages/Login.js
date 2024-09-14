@@ -39,7 +39,7 @@ function Login() {
       })
       .catch(error => {
         console.log('error', error);
-        openPopup('로그인 처리중 문제가 발생하였습니다.');
+        alert('로그인 처리중 문제가 발생하였습니다.');
       });
   }
 
