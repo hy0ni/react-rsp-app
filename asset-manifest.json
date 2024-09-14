@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/product-app/static/css/main.2a9a8df7.css",
-    "main.js": "/product-app/static/js/main.6e0e1bd8.js",
-    "index.html": "/product-app/index.html",
-    "static/media/person.svg": "/product-app/static/media/person.17fba55395d8f00e652e.svg",
-    "static/media/download.svg": "/product-app/static/media/download.246265e3f1d8b4897256.svg",
-    "main.2a9a8df7.css.map": "/product-app/static/css/main.2a9a8df7.css.map",
-    "main.6e0e1bd8.js.map": "/product-app/static/js/main.6e0e1bd8.js.map"
+    "main.css": "/react-rsp-app/static/css/main.54b03ac7.css",
+    "main.js": "/react-rsp-app/static/js/main.a3309c29.js",
+    "index.html": "/react-rsp-app/index.html",
+    "static/media/person.svg": "/react-rsp-app/static/media/person.17fba55395d8f00e652e.svg",
+    "static/media/download.svg": "/react-rsp-app/static/media/download.246265e3f1d8b4897256.svg",
+    "main.54b03ac7.css.map": "/react-rsp-app/static/css/main.54b03ac7.css.map",
+    "main.a3309c29.js.map": "/react-rsp-app/static/js/main.a3309c29.js.map"
   },
   "entrypoints": [
-    "static/css/main.2a9a8df7.css",
-    "static/js/main.6e0e1bd8.js"
+    "static/css/main.54b03ac7.css",
+    "static/js/main.a3309c29.js"
   ]
 }
