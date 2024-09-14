@@ -34,7 +34,7 @@ function App() {
   return (
     <div className="container">
       <TokenProvider>
-        <Router basename="/react-rsp-app">
+        <Router basename="/product-app">
           <Header />
           <Routes>
             <Route path="/" element={<Home />} />
