@@ -1,6 +1,7 @@
 .btn {
-  min-width:4rem;
+  min-width: 4rem;
   padding: 0.8rem 1rem;
+  font-size: .8rem;
   color: #fff;
   background: #171e33;
   border-radius: 0.6rem;
