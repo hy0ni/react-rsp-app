@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/rsp-game-app/static/css/main.5e0c327f.css",
-    "main.js": "/rsp-game-app/static/js/main.84b7a287.js",
+    "main.js": "/rsp-game-app/static/js/main.791224d4.js",
     "index.html": "/rsp-game-app/index.html",
     "static/media/person.svg": "/rsp-game-app/static/media/person.17fba55395d8f00e652e.svg",
     "static/media/download.svg": "/rsp-game-app/static/media/download.246265e3f1d8b4897256.svg",
     "main.5e0c327f.css.map": "/rsp-game-app/static/css/main.5e0c327f.css.map",
-    "main.84b7a287.js.map": "/rsp-game-app/static/js/main.84b7a287.js.map"
+    "main.791224d4.js.map": "/rsp-game-app/static/js/main.791224d4.js.map"
   },
   "entrypoints": [
     "static/css/main.5e0c327f.css",
-    "static/js/main.84b7a287.js"
+    "static/js/main.791224d4.js"
   ]
 }
