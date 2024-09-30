@@ -1,15 +1,13 @@
 import { useContext, useState } from "react";
 import { TokenContext } from "../context/TokenContext";
 import { useNavigate } from "react-router-dom";
-import Popup from "../components/Popup";
-import usePopup from "../hooks/usePopup";
 import '../css/Form.css';
+
 
 function Login() {
   const { login } = useContext(TokenContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { showPopup, popupMessage, openPopup, closePopup } = usePopup();
   const navigate = useNavigate();
 
   const handleLogin = (e) => {
@@ -27,14 +25,20 @@ function Login() {
     };
 
     fetch(`${apiUrl}/login`, requestOptions)
-      .then(response => response.json())
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('로그인에 실패하였습니다.');
+        }
+        return response.json();
+      })
       .then(data => {
         const token = data.token;
         if (token) {
           login(token);
-          openPopup('로그인에 성공하였습니다.', '/');
+          alert('로그인에 성공하였습니다.');
+          navigate('/')
         } else {
-          openPopup('로그인에 실패하였습니다.');
+          alert('로그인에 실패하였습니다.');
         }
       })
       .catch(error => {
@@ -70,7 +74,6 @@ function Login() {
         <hr />
         <button className="btn bg-white" onClick={() => navigate('/signup')} type="submit" aria-label="회원가입페이지로 이동">가입하러 가기</button>
       </form>
-      <Popup showPopup={showPopup} message={popupMessage} onClose={closePopup} />
     </div>
   )
 }

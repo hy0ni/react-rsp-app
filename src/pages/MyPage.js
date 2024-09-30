@@ -1,8 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { TokenContext } from "../context/TokenContext";
 import GameTable from "../components/GameTable";
-import usePopup from "../hooks/usePopup";
-import Popup from "../components/Popup";
 import '../css/GameTable.css'
 
 function MyPage() {
@@ -11,7 +9,6 @@ function MyPage() {
   const [selectedValue, setSelectedValue] = useState('');
   const [allGameHistory, setAllGameHistory] = useState([]);
   const [gameHistory, setGameHistory] = useState([]);
-  const { showPopup, popupMessage, openPopup, closePopup } = usePopup();
 
   useEffect(() => {
     currentUserInfo(token);
@@ -93,7 +90,7 @@ function MyPage() {
           },
           ...history
         ])
-        openPopup(`당신의 선택은 ${data.user_choice}이고,
+        alert(`당신의 선택은 ${data.user_choice}이고,
            컴퓨터의 선택은 ${data.computer_choice}입니다.
            결과는 ${data.result}입니다.`);
       })
@@ -115,7 +112,7 @@ function MyPage() {
     fetch(`${process.env.REACT_APP_API_URL}/games/${gameId}`, requestOptions)
       .then(response => response.text())
       .then(result => {
-        openPopup('게임을 삭제하였습니다.');
+        alert('게임을 삭제하였습니다.');
         setAllGameHistory(history => history.filter(game => game.id !== gameId));
         setGameHistory(history => history.filter(game => game.id !== gameId));
 
@@ -143,7 +140,6 @@ function MyPage() {
       </form>
       <h3>게임 정보</h3>
       <GameTable games={[...gameHistory, ...allGameHistory]} onDelete={handleGamesDelete} />
-      <Popup showPopup={showPopup} message={popupMessage} onClose={closePopup} />
     </div>
   )
 }
