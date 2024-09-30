@@ -1,40 +1,32 @@
-import { useContext, useEffect, useState } from "react";
 import { TokenContext } from "../context/TokenContext";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { getAllUsers } from '../api';
 import '../css/Home.css'
 
 function Home() {
-  const [users, setUsers] = useState([]);
   const { token } = useContext(TokenContext);
+  const [users, setUsers] = useState([]);
   const navigate = useNavigate();
 
-  const allUsersGameList = (token) => {
-    const apiUrl = process.env.REACT_APP_API_URL;
-
-    let requestOptions = {
-      method: 'GET',
-      headers: {
-        'Authorization': `Bearer ${token}`,
-      },
-      redirect: 'follow'
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const response = await getAllUsers(token);
+        setUsers(response.data);
+      } catch (error) {
+        console.error('Error fetching users:', error);
+        alert('데이터를 가져오는 중 오류가 발생했습니다. 나중에 다시 시도해 주세요.');
+      }
     };
 
-    fetch(`${apiUrl}/users`, requestOptions)
-      .then(response => response.json())
-      .then(result => setUsers(result))
-      .catch(error => {
-        console.log('error', error);
-        alert('데이터를 가져오는 중 오류가 발생했습니다. 나중에 다시 시도해 주세요.');
-      });
-  }
-
-  useEffect(() => {
-    allUsersGameList(token);
-  }, [token]);
+    fetchUsers();
+  }, [token, setUsers]);
 
   const handleUserInfo = (userId) => {
     navigate(`/user/${userId}/games`);
   }
+
   return (
     <ul>
       {users.map((user) =>

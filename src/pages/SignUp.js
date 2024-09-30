@@ -1,8 +1,8 @@
-import { useContext, useState } from "react";
 import { TokenContext } from "../context/TokenContext";
-import '../css/Form.css';
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { signupUser } from '../api';
+import '../css/Form.css';
 
 function SignUp() {
   const { login } = useContext(TokenContext);
@@ -10,38 +10,25 @@ function SignUp() {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  const handleSignUp = (e) => {
+  const handleSignUp = async (e) => {
     e.preventDefault();
-    const apiUrl = process.env.REACT_APP_API_URL;
 
-    let formdata = new FormData();
-    formdata.append("email", email);
-    formdata.append("password", password);
-
-    let requestOptions = {
-      method: 'POST',
-      body: formdata,
-      redirect: 'follow'
-    };
-
-    fetch(`${apiUrl}/signup`, requestOptions)
-      .then(response => response.json())
-      .then(data => {
-        const token = data.token;
-        if (token) {
-          login(token);
-          alert('회원가입에 성공하였습니다.');
-          navigate('/')
-        } else {
-          alert('회원가입에 실패하였습니다.');
-        }
-      })
-      .catch(error => {
-        console.log('error', error);
+    try {
+      const response = await signupUser(email, password);
+      const token = response.data.token;
+      if (token) {
+        login(token);
+        alert('회원가입에 성공하였습니다.');
+        navigate('/');
+      } else {
         alert('회원가입 중 오류가 발생했습니다.');
-      });
-
+      }
+    } catch (error) {
+      console.error('Sign up error:', error);
+      alert('회원가입에 실패하였습니다.');
+    }
   }
+
   return (
     <div>
       <h1>회원가입 페이지</h1>

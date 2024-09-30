@@ -1,8 +1,8 @@
-import { useContext, useState } from "react";
 import { TokenContext } from "../context/TokenContext";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { loginUser } from '../api';
 import '../css/Form.css';
-
 
 function Login() {
   const { login } = useContext(TokenContext);
@@ -10,41 +10,23 @@ function Login() {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    const apiUrl = process.env.REACT_APP_API_URL;
 
-    let formdata = new FormData();
-    formdata.append("email", email);
-    formdata.append("password", password);
-
-    let requestOptions = {
-      method: 'POST',
-      body: formdata,
-      redirect: 'follow'
-    };
-
-    fetch(`${apiUrl}/login`, requestOptions)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('로그인에 실패하였습니다.');
-        }
-        return response.json();
-      })
-      .then(data => {
-        const token = data.token;
-        if (token) {
-          login(token);
-          alert('로그인에 성공하였습니다.');
-          navigate('/')
-        } else {
-          alert('로그인에 실패하였습니다.');
-        }
-      })
-      .catch(error => {
-        console.log('error', error);
+    try {
+      const response = await loginUser(email, password);
+      const token = response.data.token;
+      if (token) {
+        login(token);
+        alert('로그인에 성공하였습니다.');
+        navigate('/');
+      } else {
         alert('로그인 처리중 문제가 발생하였습니다.');
-      });
+      }
+    } catch (error) {
+      console.error('Login error:', error);
+      alert('로그인에 실패하였습니다.');
+    }
   }
 
   return (
