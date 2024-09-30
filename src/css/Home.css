@@ -30,3 +30,17 @@
   min-width: 1.6rem;
   padding: 0 1rem;
 }
+
+/* 잘못된 경로 진입시 */
+.not-found {
+  padding-top: 10vh;
+  text-align: center;
+}
+
+.not-found a {
+  border-bottom: 1px solid #000;
+}
+
+.not-found a:hover {
+  font-style: italic;
+}

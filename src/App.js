@@ -3,6 +3,7 @@ import {
   Routes,
   Route,
   Navigate,
+  Link,
 } from "react-router-dom";
 import { TokenContext, TokenProvider } from './context/TokenContext';
 import Header from "./components/Header";
@@ -14,14 +15,6 @@ import Mypage from "./pages/Mypage";
 import './css/App.css';
 import { useContext } from "react";
 
-function UnAuthRoute({ children }) {
-  const { token } = useContext(TokenContext);
-  if (!token) {
-    return <Navigate to='/login' />;
-  }
-  return children;
-}
-
 function AuthRoute({ children }) {
   const { token } = useContext(TokenContext);
   if (token) {
@@ -30,11 +23,19 @@ function AuthRoute({ children }) {
   return children;
 }
 
+function UnAuthRoute({ children }) {
+  const { token } = useContext(TokenContext);
+  if (!token) {
+    return <Navigate to="/login" />;
+  }
+  return children;
+}
+
 function App() {
   return (
-    <div className="container">
-      <TokenProvider>
-        <Router basename="/react-rsp-app">
+    <TokenProvider>
+      <Router basename="/rsp-game-app">
+        <div className="container">
           <Header />
           <Routes>
             <Route path="/" element={<Home />} />
@@ -42,10 +43,16 @@ function App() {
             <Route path="/signup" element={<AuthRoute><Signup /></AuthRoute>} />
             <Route path="/user/:userId/games" element={<Users />} />
             <Route path="/mypage" element={<UnAuthRoute><Mypage /></UnAuthRoute>} />
+            <Route path="*" element={
+              <div className="not-found">
+                <h1>잘못된 경로 입니다.</h1>
+                <Link to='/'>홈으로</Link>
+              </div>
+            } />
           </Routes>
-        </Router>
-      </TokenProvider>
-    </div>
+        </div>
+      </Router>
+    </TokenProvider>
   )
 }
 
