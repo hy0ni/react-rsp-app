@@ -50,7 +50,14 @@ function MyPage() {
 
     fetch(`${process.env.REACT_APP_API_URL}/current_users/games`, requestOptions)
       .then(response => response.json())
-      .then(result => setAllGameHistory(result))
+      .then(result => {
+        if (Array.isArray(result)) {
+          setAllGameHistory(result);
+        } else {
+          setAllGameHistory([]);
+          console.error("배열이 아닙니다.", result);
+        }
+      })
       .catch(error => {
         console.log('error', error);
         alert('전체 전적 리스트를 가져오는 중 오류가 발생했습니다.');
